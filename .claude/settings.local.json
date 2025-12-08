@@ -4,7 +4,14 @@
       "Bash(npx tsc:*)",
       "Bash(npm run build:*)",
       "Bash(tree:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(git subtree:*)",
+      "Bash(git checkout:*)",
+      "Bash(git push:*)",
+      "WebFetch(domain:eggo00.github.io)",
+      "Bash(cat:*)",
+      "Bash(curl:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []

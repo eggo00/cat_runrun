@@ -139,7 +139,7 @@ export class Player implements Collidable {
     }
 
     // Rotate cat to face forward
-    this.mesh.rotation.y = Math.PI;
+    this.mesh.rotation.y = 0;
 
     // Update bounding box
     this.boundingBox.setFromObject(this.mesh);
