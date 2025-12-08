@@ -4,7 +4,7 @@ export const GAME_CONFIG = {
   // Lane settings
   LANE_COUNT: 3,
   LANE_WIDTH: 3,
-  LANE_POSITIONS: [-3, 0, 3], // Left, Center, Right
+  LANE_POSITIONS: [3, 0, -3], // Left, Center, Right
 
   // Player settings
   PLAYER_START_LANE: 1, // Center lane
