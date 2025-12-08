@@ -11,7 +11,8 @@
       "WebFetch(domain:eggo00.github.io)",
       "Bash(cat:*)",
       "Bash(curl:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []

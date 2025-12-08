@@ -1,4 +1,4 @@
-// import { ASSET_PATHS } from '../utils/Constants'; // Temporarily disabled
+import { ASSET_PATHS } from '../utils/Constants';
 import { AudioSettings } from '../types';
 
 export class AudioManager {
@@ -24,13 +24,6 @@ export class AudioManager {
   async init(): Promise<void> {
     if (this.initialized) return;
 
-    // Temporary: Skip audio loading since audio files are not available yet
-    // TODO: Add actual audio files to public/sounds/ folder
-    console.log('Audio system initialized (silent mode - no audio files available)');
-    this.initialized = true;
-    return;
-
-    /* Uncomment this when audio files are available:
     try {
       // Load background music
       this.bgm = await this.loadAudio(ASSET_PATHS.SOUNDS.BGM);
@@ -52,7 +45,6 @@ export class AudioManager {
       console.warn('Some audio files failed to load, using silent fallback', error);
       this.initialized = true; // Continue anyway
     }
-    */
   }
 
   /**
@@ -74,7 +66,6 @@ export class AudioManager {
   /**
    * Load and store a sound effect
    */
-  // @ts-ignore - Temporarily disabled
   private async loadSound(name: string, src: string): Promise<void> {
     const audio = await this.loadAudio(src);
     audio.volume = this.settings.sfxVolume;
