@@ -60,29 +60,32 @@ export const GAME_CONFIG = {
   SCORE_PER_METER: 1,
 };
 
+// Use relative paths for assets in public folder (works with base path)
+const BASE_PATH = '/cat_runrun';
+
 export const ASSET_PATHS = {
   MODELS: {
-    CAT: '/models/cat.glb',
-    OBSTACLE_BARREL: '/models/barrel.glb',
-    OBSTACLE_CRATE: '/models/crate.glb',
-    OBSTACLE_HURDLE: '/models/hurdle.glb',
-    COIN: '/models/coin.glb',
-    FISH: '/models/fish.glb',
-    POWERUP_MAGNET: '/models/magnet.glb',
-    POWERUP_MULTIPLIER: '/models/multiplier.glb',
-    POWERUP_SHIELD: '/models/shield.glb',
+    CAT: `${BASE_PATH}/models/cat.glb`,
+    OBSTACLE_BARREL: `${BASE_PATH}/models/barrel.glb`,
+    OBSTACLE_CRATE: `${BASE_PATH}/models/crate.glb`,
+    OBSTACLE_HURDLE: `${BASE_PATH}/models/hurdle.glb`,
+    COIN: `${BASE_PATH}/models/coin.glb`,
+    FISH: `${BASE_PATH}/models/fish.glb`,
+    POWERUP_MAGNET: `${BASE_PATH}/models/magnet.glb`,
+    POWERUP_MULTIPLIER: `${BASE_PATH}/models/multiplier.glb`,
+    POWERUP_SHIELD: `${BASE_PATH}/models/shield.glb`,
   },
   TEXTURES: {
-    GROUND: '/textures/ground.png',
-    SKY: '/textures/sky.png',
+    GROUND: `${BASE_PATH}/textures/ground.png`,
+    SKY: `${BASE_PATH}/textures/sky.png`,
   },
   SOUNDS: {
-    JUMP: '/sounds/jump.wav',
-    COIN: '/sounds/coin.wav',
-    FISH: '/sounds/fish.wav',
-    HIT: '/sounds/hit.wav',
-    POWERUP: '/sounds/powerup.wav',
-    BGM: '/sounds/bgm.mp3',
+    JUMP: `${BASE_PATH}/sounds/jump.wav`,
+    COIN: `${BASE_PATH}/sounds/coin.wav`,
+    FISH: `${BASE_PATH}/sounds/fish.wav`,
+    HIT: `${BASE_PATH}/sounds/hit.wav`,
+    POWERUP: `${BASE_PATH}/sounds/powerup.wav`,
+    BGM: `${BASE_PATH}/sounds/bgm-temp.wav`,
   },
 };
 

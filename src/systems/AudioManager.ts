@@ -24,13 +24,18 @@ export class AudioManager {
   async init(): Promise<void> {
     if (this.initialized) return;
 
+    console.log('🎵 Initializing audio system...');
+
     try {
       // Load background music
+      console.log('Loading BGM from:', ASSET_PATHS.SOUNDS.BGM);
       this.bgm = await this.loadAudio(ASSET_PATHS.SOUNDS.BGM);
       this.bgm.loop = true;
       this.bgm.volume = this.settings.musicVolume;
+      console.log('✓ BGM loaded');
 
       // Load sound effects
+      console.log('Loading sound effects...');
       await Promise.all([
         this.loadSound('jump', ASSET_PATHS.SOUNDS.JUMP),
         this.loadSound('coin', ASSET_PATHS.SOUNDS.COIN),
@@ -40,9 +45,10 @@ export class AudioManager {
       ]);
 
       this.initialized = true;
-      console.log('Audio system initialized');
+      console.log('✅ Audio system initialized successfully');
+      console.log('Loaded sounds:', Array.from(this.sounds.keys()));
     } catch (error) {
-      console.warn('Some audio files failed to load, using silent fallback', error);
+      console.error('❌ Audio initialization failed:', error);
       this.initialized = true; // Continue anyway
     }
   }
@@ -91,13 +97,24 @@ export class AudioManager {
    * Play background music
    */
   playMusic(): void {
-    if (!this.settings.musicEnabled || !this.bgm) return;
+    if (!this.settings.musicEnabled) {
+      console.log('Music disabled');
+      return;
+    }
 
+    if (!this.bgm) {
+      console.warn('⚠️ BGM not loaded');
+      return;
+    }
+
+    console.log('🎵 Attempting to play music...');
     this.bgm.currentTime = 0;
-    this.bgm.play().catch(e => {
-      console.warn('Failed to play music, waiting for user interaction', e);
-      // Music autoplay is often blocked, will retry on user interaction
-    });
+    this.bgm.play()
+      .then(() => console.log('✅ Music playing'))
+      .catch(e => {
+        console.warn('❌ Failed to play music (browser autoplay policy):', e.message);
+        console.log('💡 Music will play after user interaction');
+      });
   }
 
   /**
