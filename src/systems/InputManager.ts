@@ -27,6 +27,8 @@ export class InputManager {
   private touchmoveHandler: (e: TouchEvent) => void;
   private touchendHandler: (e: TouchEvent) => void;
 
+  private isGamePlaying: boolean = false;
+
   constructor() {
     this.keydownHandler = this.onKeyDown.bind(this);
     this.keyupHandler = this.onKeyUp.bind(this);
@@ -110,6 +112,9 @@ export class InputManager {
   }
 
   private onTouchStart(e: TouchEvent): void {
+    // Only handle touch events when game is playing
+    if (!this.isGamePlaying) return;
+
     e.preventDefault();
     const touch = e.touches[0];
     this.touchState.startX = touch.clientX;
@@ -119,6 +124,9 @@ export class InputManager {
   }
 
   private onTouchMove(e: TouchEvent): void {
+    // Only handle touch events when game is playing
+    if (!this.isGamePlaying) return;
+
     e.preventDefault();
     if (!this.touchState.isSwiping) return;
 
@@ -128,6 +136,9 @@ export class InputManager {
   }
 
   private onTouchEnd(e: TouchEvent): void {
+    // Only handle touch events when game is playing
+    if (!this.isGamePlaying) return;
+
     e.preventDefault();
     if (!this.touchState.isSwiping) return;
 
@@ -195,6 +206,14 @@ export class InputManager {
       slide: false,
       pause: false,
     };
+  }
+
+  /**
+   * Set whether the game is currently playing
+   * This controls whether touch events should be intercepted
+   */
+  setGamePlaying(isPlaying: boolean): void {
+    this.isGamePlaying = isPlaying;
   }
 
   /**

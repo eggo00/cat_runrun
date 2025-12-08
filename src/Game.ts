@@ -112,6 +112,9 @@ export class Game {
     this.powerUpSystem.reset();
     this.inputManager.reset();
 
+    // Enable input handling
+    this.inputManager.setGamePlaying(true);
+
     // Load total coins from localStorage
     this.scoreSystem.loadTotalCoins();
 
@@ -137,6 +140,10 @@ export class Game {
     this.setState(GameState.PLAYING);
     this.uiManager.hidePauseMenu();
     this.audioManager.resumeMusic();
+
+    // Re-enable input handling
+    this.inputManager.setGamePlaying(true);
+
     this.lastTime = performance.now();
     this.gameLoop();
   }
@@ -147,6 +154,10 @@ export class Game {
   private quitToMenu(): void {
     this.setState(GameState.MENU);
     this.audioManager.stopMusic();
+
+    // Disable input handling when in menu
+    this.inputManager.setGamePlaying(false);
+
     cancelAnimationFrame(this.animationFrameId);
   }
 
@@ -159,6 +170,10 @@ export class Game {
     this.setState(GameState.PAUSED);
     this.uiManager.showPauseMenu();
     this.audioManager.pauseMusic();
+
+    // Disable input handling when paused
+    this.inputManager.setGamePlaying(false);
+
     cancelAnimationFrame(this.animationFrameId);
   }
 
@@ -167,6 +182,9 @@ export class Game {
    */
   private gameOver(): void {
     this.setState(GameState.GAME_OVER);
+
+    // Disable input handling when game is over
+    this.inputManager.setGamePlaying(false);
 
     // Save high score
     const highScore = this.scoreSystem.saveHighScore();
