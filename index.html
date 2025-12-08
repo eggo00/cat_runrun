@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="Cat Run Run - A cute low-poly endless runner game">
+  <title>Cat Run Run</title>
+  <script type="module" crossorigin src="/cat_runrun/assets/index-BwnUPSsW.js"></script>
+  <link rel="modulepreload" crossorigin href="/cat_runrun/assets/three-C8A5Y40v.js">
+  <link rel="stylesheet" crossorigin href="/cat_runrun/assets/index-DMEXx5Zd.css">
+</head>
+<body>
+  <!-- Game Canvas Container -->
+  <div id="game-container"></div>
+
+  <!-- UI Overlay -->
+  <div id="ui-overlay">
+    <!-- Main Menu -->
+    <div id="main-menu" class="menu active">
+      <div class="menu-content">
+        <h1 class="game-title">🐱 Cat Run Run</h1>
+        <p class="game-subtitle">Endless Runner Adventure</p>
+        <button id="btn-start" class="btn btn-primary">Start Game</button>
+        <button id="btn-tutorial" class="btn btn-secondary">How to Play</button>
+        <button id="btn-leaderboard" class="btn btn-secondary">Leaderboard</button>
+        <button id="btn-shop" class="btn btn-secondary">Skins Shop</button>
+        <div class="audio-controls">
+          <label>
+            <input type="checkbox" id="toggle-music" checked> Music
+          </label>
+          <label>
+            <input type="checkbox" id="toggle-sfx" checked> SFX
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tutorial Overlay -->
+    <div id="tutorial-menu" class="menu">
+      <div class="menu-content">
+        <h2>How to Play</h2>
+        <div class="tutorial-section">
+          <h3>Desktop Controls:</h3>
+          <p>← → or A/D: Switch Lanes</p>
+          <p>Space: Jump</p>
+          <p>Shift or S: Slide</p>
+        </div>
+        <div class="tutorial-section">
+          <h3>Mobile Controls:</h3>
+          <p>Swipe Left/Right: Switch Lanes</p>
+          <p>Swipe Up: Jump</p>
+          <p>Swipe Down: Slide</p>
+        </div>
+        <div class="tutorial-section">
+          <h3>Objective:</h3>
+          <p>Avoid obstacles, collect coins and fish!</p>
+          <p>Use power-ups to boost your score!</p>
+        </div>
+        <button id="btn-back-tutorial" class="btn btn-primary">Back</button>
+      </div>
+    </div>
+
+    <!-- Shop Menu -->
+    <div id="shop-menu" class="menu">
+      <div class="menu-content">
+        <h2>Skins Shop</h2>
+        <div id="skins-list" class="skins-grid">
+          <!-- Will be populated by JavaScript -->
+        </div>
+        <button id="btn-back-shop" class="btn btn-primary">Back</button>
+      </div>
+    </div>
+
+    <!-- Leaderboard Menu -->
+    <div id="leaderboard-menu" class="menu">
+      <div class="menu-content">
+        <h2>Leaderboard</h2>
+        <div id="leaderboard-list" class="leaderboard-list">
+          <!-- Will be populated by JavaScript -->
+        </div>
+        <button id="btn-back-leaderboard" class="btn btn-primary">Back</button>
+      </div>
+    </div>
+
+    <!-- HUD (In-Game) -->
+    <div id="hud" class="hidden">
+      <div class="hud-top">
+        <div class="hud-stat">
+          <span class="hud-label">Score</span>
+          <span id="hud-score" class="hud-value">0</span>
+        </div>
+        <div class="hud-stat">
+          <span class="hud-label">Distance</span>
+          <span id="hud-distance" class="hud-value">0m</span>
+        </div>
+        <div class="hud-stat">
+          <span class="hud-label">Coins</span>
+          <span id="hud-coins" class="hud-value">0</span>
+        </div>
+      </div>
+      <div class="hud-powerups">
+        <div id="powerup-magnet" class="powerup-indicator hidden">
+          <span class="powerup-icon">🧲</span>
+          <span class="powerup-timer">0s</span>
+        </div>
+        <div id="powerup-multiplier" class="powerup-indicator hidden">
+          <span class="powerup-icon">✖️2</span>
+          <span class="powerup-timer">0s</span>
+        </div>
+        <div id="powerup-shield" class="powerup-indicator hidden">
+          <span class="powerup-icon">🛡️</span>
+          <span class="powerup-timer">0s</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Menu -->
+    <div id="gameover-menu" class="menu">
+      <div class="menu-content">
+        <h2>Game Over!</h2>
+        <div class="score-summary">
+          <div class="score-item">
+            <span class="score-label">Final Score:</span>
+            <span id="final-score" class="score-value">0</span>
+          </div>
+          <div class="score-item">
+            <span class="score-label">Distance:</span>
+            <span id="final-distance" class="score-value">0m</span>
+          </div>
+          <div class="score-item">
+            <span class="score-label">Coins:</span>
+            <span id="final-coins" class="score-value">0</span>
+          </div>
+          <div class="score-item highlight">
+            <span class="score-label">Best Score:</span>
+            <span id="best-score" class="score-value">0</span>
+          </div>
+        </div>
+        <button id="btn-restart" class="btn btn-primary">Play Again</button>
+        <button id="btn-share" class="btn btn-secondary">Share Score</button>
+        <button id="btn-menu" class="btn btn-secondary">Main Menu</button>
+      </div>
+    </div>
+
+    <!-- Pause Menu -->
+    <div id="pause-menu" class="menu">
+      <div class="menu-content">
+        <h2>Paused</h2>
+        <button id="btn-resume" class="btn btn-primary">Resume</button>
+        <button id="btn-quit" class="btn btn-secondary">Quit to Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-content">
+      <h2>Loading...</h2>
+      <div class="loading-bar">
+        <div id="loading-progress" class="loading-progress"></div>
+      </div>
+      <p id="loading-text">Preparing game assets...</p>
+    </div>
+  </div>
+
+</body>
+</html>
