@@ -217,14 +217,14 @@ export class Game {
     const input = this.inputManager.getInputState();
     const player = this.gameScene.getPlayer();
 
-    // Lane switching (swapped to match camera perspective)
+    // Lane switching
     if (input.left) {
-      if (player.moveRight()) {
+      if (player.moveLeft()) {
         this.audioManager.playSFX('jump'); // Reuse jump sound for lane switch
       }
       this.inputManager.reset();
     } else if (input.right) {
-      if (player.moveLeft()) {
+      if (player.moveRight()) {
         this.audioManager.playSFX('jump');
       }
       this.inputManager.reset();
