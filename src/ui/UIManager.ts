@@ -56,33 +56,61 @@ export class UIManager {
     return element;
   }
 
+  /**
+   * Add both click and touchstart handlers for better mobile support
+   * Prevents double-firing by tracking which event fired first
+   */
+  private addClickHandler(elementId: string, handler: () => void): void {
+    const element = this.getElement(elementId);
+    let touchHandled = false;
+
+    // Handle touch events (mobile)
+    element.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      touchHandled = true;
+      handler();
+
+      // Reset flag after a short delay
+      setTimeout(() => {
+        touchHandled = false;
+      }, 300);
+    }, { passive: false });
+
+    // Handle click events (desktop and mobile fallback)
+    element.addEventListener('click', () => {
+      if (!touchHandled) {
+        handler();
+      }
+    });
+  }
+
   private setupEventListeners(): void {
-    // Main menu buttons
-    this.getElement('btn-start').addEventListener('click', () => this.emit('startGame'));
-    this.getElement('btn-tutorial').addEventListener('click', () => this.showTutorial());
-    this.getElement('btn-leaderboard').addEventListener('click', () => this.showLeaderboard());
-    this.getElement('btn-shop').addEventListener('click', () => this.showShop());
+    // Main menu buttons - add both click and touchstart for better mobile support
+    this.addClickHandler('btn-start', () => this.emit('startGame'));
+    this.addClickHandler('btn-tutorial', () => this.showTutorial());
+    this.addClickHandler('btn-leaderboard', () => this.showLeaderboard());
+    this.addClickHandler('btn-shop', () => this.showShop());
 
     // Tutorial menu
-    this.getElement('btn-back-tutorial').addEventListener('click', () => this.showMainMenu());
+    this.addClickHandler('btn-back-tutorial', () => this.showMainMenu());
 
     // Shop menu
-    this.getElement('btn-back-shop').addEventListener('click', () => this.showMainMenu());
+    this.addClickHandler('btn-back-shop', () => this.showMainMenu());
 
     // Leaderboard menu
-    this.getElement('btn-back-leaderboard').addEventListener('click', () => this.showMainMenu());
+    this.addClickHandler('btn-back-leaderboard', () => this.showMainMenu());
 
     // Game over menu
-    this.getElement('btn-restart').addEventListener('click', () => this.emit('restart'));
-    this.getElement('btn-menu').addEventListener('click', () => {
+    this.addClickHandler('btn-restart', () => this.emit('restart'));
+    this.addClickHandler('btn-menu', () => {
       this.showMainMenu();
       this.emit('returnToMenu');
     });
-    this.getElement('btn-share').addEventListener('click', () => this.shareScore());
+    this.addClickHandler('btn-share', () => this.shareScore());
 
     // Pause menu
-    this.getElement('btn-resume').addEventListener('click', () => this.emit('resume'));
-    this.getElement('btn-quit').addEventListener('click', () => {
+    this.addClickHandler('btn-resume', () => this.emit('resume'));
+    this.addClickHandler('btn-quit', () => {
       this.showMainMenu();
       this.emit('quit');
     });
