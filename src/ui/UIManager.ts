@@ -240,6 +240,22 @@ export class UIManager {
   }
 
   /**
+   * Update health hearts display
+   */
+  updateHealth(currentHealth: number, maxHealth: number = 3): void {
+    for (let i = 1; i <= maxHealth; i++) {
+      const heart = document.getElementById(`heart-${i}`);
+      if (heart) {
+        if (i <= currentHealth) {
+          heart.classList.remove('lost');
+        } else {
+          heart.classList.add('lost');
+        }
+      }
+    }
+  }
+
+  /**
    * Show power-up indicator
    */
   showPowerUp(type: PowerUpType, duration: number): void {

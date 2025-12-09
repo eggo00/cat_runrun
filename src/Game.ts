@@ -2,6 +2,7 @@ import { GameScene } from './scenes/GameScene';
 import { InputManager } from './systems/InputManager';
 import { ScoreSystem } from './systems/ScoreSystem';
 import { PowerUpSystem } from './systems/PowerUpSystem';
+import { HealthSystem } from './systems/HealthSystem';
 import { AudioManager } from './systems/AudioManager';
 import { UIManager } from './ui/UIManager';
 import { GameState, PowerUpType, CollectibleType } from './types';
@@ -14,6 +15,7 @@ export class Game {
   private inputManager: InputManager;
   private scoreSystem: ScoreSystem;
   private powerUpSystem: PowerUpSystem;
+  private healthSystem: HealthSystem;
   private audioManager: AudioManager;
   private uiManager: UIManager;
 
@@ -27,6 +29,7 @@ export class Game {
     this.inputManager = new InputManager();
     this.scoreSystem = new ScoreSystem();
     this.powerUpSystem = new PowerUpSystem();
+    this.healthSystem = new HealthSystem(3); // 3 hearts
     this.audioManager = new AudioManager();
     this.uiManager = new UIManager();
 
@@ -74,6 +77,12 @@ export class Game {
     this.scoreSystem.on('distanceChange', (distance: number) => this.uiManager.updateDistance(distance));
     this.scoreSystem.on('coinCollect', (coins: number) => this.uiManager.updateCoins(coins));
 
+    // Health system callbacks
+    this.healthSystem.on('healthChange', (health: number) => {
+      this.uiManager.updateHealth(health, this.healthSystem.getMaxHealth());
+    });
+    this.healthSystem.on('death', () => this.gameOver());
+
     // Power-up system callbacks
     this.powerUpSystem.on('powerUpActivate', (type: PowerUpType) => {
       this.onPowerUpActivate(type);
@@ -110,6 +119,7 @@ export class Game {
     this.gameScene.reset();
     this.scoreSystem.reset();
     this.powerUpSystem.reset();
+    this.healthSystem.reset();
     this.inputManager.reset();
 
     // Enable input handling
@@ -324,9 +334,11 @@ export class Game {
       const player = this.gameScene.getPlayer();
 
       if (!player.isInvincible()) {
-        // Hit obstacle - game over
+        // Hit obstacle - take damage
         player.hit();
-        this.gameOver();
+        this.healthSystem.takeDamage(1);
+        this.audioManager.playSFX('hit');
+        // Game over is now handled by healthSystem's 'death' event
       }
     } else if (type === 'collectible') {
       const collectible = object as Collectible;
