@@ -12,7 +12,11 @@
       "Bash(cat:*)",
       "Bash(curl:*)",
       "Bash(find:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist status)",
+      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist log --oneline -3)",
+      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist diff)",
+      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist ls-files assets/)"
     ],
     "deny": [],
     "ask": []
