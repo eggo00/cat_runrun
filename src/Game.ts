@@ -331,14 +331,19 @@ export class Game {
    */
   private handleCollision(type: 'obstacle' | 'collectible', object: Obstacle | Collectible): void {
     if (type === 'obstacle') {
+      console.log('handleCollision called for obstacle');
       const player = this.gameScene.getPlayer();
 
       if (!player.isInvincible()) {
+        console.log('Player not invincible, taking damage. Current health:', this.healthSystem.getCurrentHealth());
         // Hit obstacle - take damage
         player.hit();
-        this.healthSystem.takeDamage(1);
+        const died = this.healthSystem.takeDamage(1);
+        console.log('After damage. Current health:', this.healthSystem.getCurrentHealth(), 'Died:', died);
         this.audioManager.playSFX('hit');
         // Game over is now handled by healthSystem's 'death' event
+      } else {
+        console.log('Player is invincible, no damage taken');
       }
     } else if (type === 'collectible') {
       const collectible = object as Collectible;

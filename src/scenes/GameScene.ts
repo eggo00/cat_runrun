@@ -283,6 +283,11 @@ export class GameScene {
       pool.getActive().forEach(obstacle => {
         if (CollisionSystem.checkLaneCollision(playerLane, playerZ, obstacle.getLane(), obstacle.position.z)) {
           if (CollisionSystem.checkSphereCollision(this.player, obstacle)) {
+            console.log('Obstacle collision detected!', {
+              playerLane,
+              obstacleLane: obstacle.getLane(),
+              invincible: this.player.isInvincible()
+            });
             this.onCollision?.('obstacle', obstacle);
             pool.release(obstacle);
           }
