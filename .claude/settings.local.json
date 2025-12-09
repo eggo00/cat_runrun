@@ -20,7 +20,10 @@
       "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist log origin/main..HEAD --oneline)",
       "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist status --short)",
       "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist diff --stat)",
-      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist add -A)"
+      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist add -A)",
+      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist log -1 --oneline)",
+      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist push origin main)",
+      "Bash(gh repo view:*)"
     ],
     "deny": [],
     "ask": []
