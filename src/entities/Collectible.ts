@@ -63,6 +63,44 @@ export class Collectible implements IPoolable, Collidable {
         break;
       }
 
+      case CollectibleType.HEART: {
+        // Create a heart shape using spheres
+        const material = new THREE.MeshStandardMaterial({
+          color: COLORS.HEART,
+          emissive: COLORS.HEART,
+          emissiveIntensity: 0.5,
+          metalness: 0.3,
+          roughness: 0.4,
+        });
+
+        // Left sphere
+        const leftSphere = new THREE.Mesh(
+          new THREE.SphereGeometry(0.25, 16, 16),
+          material
+        );
+        leftSphere.position.set(-0.15, 0.15, 0);
+        group.add(leftSphere);
+
+        // Right sphere
+        const rightSphere = new THREE.Mesh(
+          new THREE.SphereGeometry(0.25, 16, 16),
+          material
+        );
+        rightSphere.position.set(0.15, 0.15, 0);
+        group.add(rightSphere);
+
+        // Bottom diamond
+        const bottomGeometry = new THREE.BoxGeometry(0.4, 0.4, 0.3);
+        const bottom = new THREE.Mesh(bottomGeometry, material);
+        bottom.position.set(0, -0.1, 0);
+        bottom.rotation.z = Math.PI / 4;
+        group.add(bottom);
+
+        // Scale entire heart
+        group.scale.set(1.2, 1.2, 1.2);
+        break;
+      }
+
       case CollectibleType.POWERUP_MAGNET: {
         const geometry = new THREE.TorusGeometry(0.3, 0.1, 8, 12);
         const material = new THREE.MeshStandardMaterial({

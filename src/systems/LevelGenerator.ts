@@ -33,6 +33,11 @@ export class LevelGenerator {
       this.generatePowerUp(config);
     }
 
+    // Rarely add hearts for healing (very rare)
+    if (Math.random() < 0.08) {
+      this.generateHeart(config);
+    }
+
     this.segmentCounter++;
     return config;
   }
@@ -221,6 +226,22 @@ export class LevelGenerator {
     if (!this.isObstacleAt(config, lane, position)) {
       config.collectibles.push({
         type,
+        lane,
+        position,
+      });
+    }
+  }
+
+  /**
+   * Generate a heart for healing
+   */
+  private generateHeart(config: SegmentConfig): void {
+    const lane = this.randomLane();
+    const position = this.randomPositionInSegment();
+
+    if (!this.isObstacleAt(config, lane, position)) {
+      config.collectibles.push({
+        type: CollectibleType.HEART,
         lane,
         position,
       });

@@ -96,6 +96,7 @@ export const COLORS = {
   OBSTACLE: 0x8B4513,
   COIN: 0xFFD700,
   FISH: 0xFF69B4,
+  HEART: 0xFF1493,
   POWERUP_MAGNET: 0x4169E1,
   POWERUP_MULTIPLIER: 0xFF4500,
   POWERUP_SHIELD: 0x00CED1,
@@ -132,6 +133,7 @@ export enum ObstacleType {
 export enum CollectibleType {
   COIN = 'coin',
   FISH = 'fish',
+  HEART = 'heart',
   POWERUP_MAGNET = 'powerup_magnet',
   POWERUP_MULTIPLIER = 'powerup_multiplier',
   POWERUP_SHIELD = 'powerup_shield',

@@ -359,6 +359,13 @@ export class Game {
           this.audioManager.playSFX('fish');
           break;
 
+        case CollectibleType.HEART:
+          // Heal player by 1 heart
+          this.healthSystem.heal(1);
+          this.audioManager.playSFX('powerup');
+          console.log('Heart collected! Current health:', this.healthSystem.getCurrentHealth());
+          break;
+
         case CollectibleType.POWERUP_MAGNET:
           this.powerUpSystem.activatePowerUp(PowerUpType.MAGNET);
           this.audioManager.playSFX('powerup');
