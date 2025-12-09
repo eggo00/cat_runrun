@@ -64,8 +64,11 @@ export class UIManager {
     const element = this.getElement(elementId);
     let touchHandled = false;
 
+    console.log(`Setting up click handler for: ${elementId}`);
+
     // Handle touch events (mobile)
     element.addEventListener('touchstart', (e) => {
+      console.log(`Touch event on ${elementId}`);
       e.preventDefault();
       touchHandled = true;
       handler();
@@ -78,6 +81,7 @@ export class UIManager {
 
     // Handle click events (desktop and mobile fallback)
     element.addEventListener('click', () => {
+      console.log(`Click event on ${elementId}, touchHandled: ${touchHandled}`);
       if (!touchHandled) {
         handler();
       }
@@ -315,7 +319,10 @@ export class UIManager {
    * Hide loading screen
    */
   hideLoadingScreen(): void {
+    console.log('Hiding loading screen');
     this.loadingScreen.classList.add('hidden');
+    // Also set display none to ensure it doesn't block clicks
+    this.loadingScreen.style.display = 'none';
   }
 
   /**
@@ -421,9 +428,12 @@ export class UIManager {
   }
 
   private emit(event: string, ...args: any[]): void {
+    console.log(`Emitting event: ${event}`, args);
     const callback = this.callbacks.get(event);
     if (callback) {
       callback(...args);
+    } else {
+      console.warn(`No callback registered for event: ${event}`);
     }
   }
 }
