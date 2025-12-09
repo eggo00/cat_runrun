@@ -29,7 +29,9 @@
       "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist push cat_runrun main:gh-pages --force)",
       "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist commit -m \"Add debug logs for collision detection\")",
       "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist commit -m \"Fix collision detection coordinate system bug\")",
-      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist commit -m \"Add heart collectibles for healing - Hearts appear rarely and restore 1 health point\")"
+      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist commit -m \"Add heart collectibles for healing - Hearts appear rarely and restore 1 health point\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
