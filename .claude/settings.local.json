@@ -17,7 +17,10 @@
       "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist log --oneline -3)",
       "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist diff)",
       "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist ls-files assets/)",
-      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist log origin/main..HEAD --oneline)"
+      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist log origin/main..HEAD --oneline)",
+      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist status --short)",
+      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist diff --stat)",
+      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist add -A)"
     ],
     "deny": [],
     "ask": []
