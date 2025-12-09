@@ -28,7 +28,8 @@
       "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist commit -m \"$(cat <<''EOF''\nAdd health system with 3 hearts\n\n- Add HealthSystem to manage player health\n- Display 3 hearts in top-right corner of HUD\n- Obstacles now deal damage instead of instant game over\n- Game ends when all hearts are lost\n- Hearts have animated heartbeat effect\n- Lost hearts show as grayscale\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist push cat_runrun main:gh-pages --force)",
       "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist commit -m \"Add debug logs for collision detection\")",
-      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist commit -m \"Fix collision detection coordinate system bug\")"
+      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist commit -m \"Fix collision detection coordinate system bug\")",
+      "Bash(git -C /Users/fanny/Desktop/Vibe_coding_camp/cat_runrun/dist commit -m \"Add heart collectibles for healing - Hearts appear rarely and restore 1 health point\")"
     ],
     "deny": [],
     "ask": []
