@@ -93,6 +93,11 @@ export class Obstacle implements IPoolable, Collidable {
     // Obstacles move backward (player appears to move forward)
     // This is handled by the world scrolling system
     this.boundingBox.setFromObject(this.mesh);
+
+    // Calculate radius from bounding box for accurate collision
+    const size = new THREE.Vector3();
+    this.boundingBox.getSize(size);
+    this.radius = Math.max(size.x, size.y, size.z) / 2;
   }
 
   /**

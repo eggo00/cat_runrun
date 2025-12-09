@@ -281,11 +281,29 @@ export class GameScene {
     // Check obstacle collisions
     this.obstaclePoolsMap.forEach(pool => {
       pool.getActive().forEach(obstacle => {
-        if (CollisionSystem.checkLaneCollision(playerLane, playerZ, obstacle.getLane(), obstacle.position.z)) {
-          if (CollisionSystem.checkSphereCollision(this.player, obstacle)) {
+        // Convert obstacle's local position to world position
+        const obstacleWorldZ = obstacle.position.z + this.worldGroup.position.z;
+
+        if (CollisionSystem.checkLaneCollision(playerLane, playerZ, obstacle.getLane(), obstacleWorldZ)) {
+          // Create a temporary position for sphere collision check
+          const obstacleWorldPos = new THREE.Vector3(
+            obstacle.position.x,
+            obstacle.position.y,
+            obstacleWorldZ
+          );
+
+          // Check sphere collision using world coordinates
+          const distance = this.player.position.distanceTo(obstacleWorldPos);
+          const combinedRadius = this.player.getRadius() + obstacle.getRadius();
+
+          if (distance < combinedRadius) {
             console.log('Obstacle collision detected!', {
               playerLane,
+              playerZ,
               obstacleLane: obstacle.getLane(),
+              obstacleWorldZ,
+              distance,
+              combinedRadius,
               invincible: this.player.isInvincible()
             });
             this.onCollision?.('obstacle', obstacle);
@@ -298,8 +316,22 @@ export class GameScene {
     // Check collectible collisions
     this.collectiblePoolsMap.forEach(pool => {
       pool.getActive().forEach(collectible => {
-        if (CollisionSystem.checkLaneCollision(playerLane, playerZ, collectible.getLane(), collectible.position.z, 2)) {
-          if (CollisionSystem.checkSphereCollision(this.player, collectible)) {
+        // Convert collectible's local position to world position
+        const collectibleWorldZ = collectible.position.z + this.worldGroup.position.z;
+
+        if (CollisionSystem.checkLaneCollision(playerLane, playerZ, collectible.getLane(), collectibleWorldZ, 2)) {
+          // Create a temporary position for sphere collision check
+          const collectibleWorldPos = new THREE.Vector3(
+            collectible.position.x,
+            collectible.position.y,
+            collectibleWorldZ
+          );
+
+          // Check sphere collision using world coordinates
+          const distance = this.player.position.distanceTo(collectibleWorldPos);
+          const combinedRadius = this.player.getRadius() + collectible.getRadius();
+
+          if (distance < combinedRadius) {
             this.onCollision?.('collectible', collectible);
             pool.release(collectible);
           }
