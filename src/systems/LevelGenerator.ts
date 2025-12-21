@@ -33,8 +33,8 @@ export class LevelGenerator {
       this.generatePowerUp(config);
     }
 
-    // Add hearts for healing (appears roughly every 5 segments)
-    if (Math.random() < 0.20) {
+    // Rarely add hearts for healing (very rare - 8% chance)
+    if (Math.random() < 0.08) {
       this.generateHeart(config);
       console.log('💗 Heart generated at segment', this.segmentCounter);
     }
